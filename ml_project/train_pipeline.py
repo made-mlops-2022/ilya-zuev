@@ -1,6 +1,7 @@
 import logging
 import sys
 import click
+import json
 
 from entities.train_pipeline_params import (
     TrainingPipelineParams,
@@ -14,7 +15,8 @@ from features.build_features import (
 from models.model_fit_predict import (
     train_model,
     predict_model,
-    evaluate_model
+    evaluate_model,
+    serialize_model
 )
 from data.make_dataset import read_csv, split_train_test_data
 
@@ -64,7 +66,12 @@ def train_pipeline(training_pipeline_params: TrainingPipelineParams):
 
     logger.info(f"metrics is {metrics}")
 
-    return metrics
+    with open(training_pipeline_params.metric_path, "w") as metric_file:
+        json.dump(metrics, metric_file)
+
+    path_to_model = serialize_model(model, training_pipeline_params.output_model_path)
+
+    return path_to_model, metrics
 
 
 @click.command(name="train_pipeline")

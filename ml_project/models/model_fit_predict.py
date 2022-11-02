@@ -1,4 +1,5 @@
 from typing import Dict
+import pickle
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
@@ -44,3 +45,9 @@ def evaluate_model(
         "recall_score": recall_score(target, predicts),
         "roc_auc_score": roc_auc_score(target, predicts),
     }
+
+
+def serialize_model(model: SklearnClassificationModel, output: str) -> str:
+    with open(output, "wb") as f:
+        pickle.dump(model, f)
+    return output
