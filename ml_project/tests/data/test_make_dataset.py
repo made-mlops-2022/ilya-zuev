@@ -5,9 +5,9 @@ from entities.split_params import SplittingParams
 
 
 class TestMakeDataset(unittest.TestCase):
-    PATH_TO_TEST_SAMPLE = "tests/data/data/sample01.csv"
-    PATH_TO_TEST_SAMPLE_STATS = "tests/data/data/sample01_stats.pkl"
-    PATH_TO_TEST_SAMPLE_SPLIT_STATS = "tests/data/data/sample01_split_stats.pkl"
+    PATH_TO_TEST_SAMPLE = "tests/samples/sample01.csv"
+    PATH_TO_TEST_SAMPLE_STATS = "tests/samples/sample01_stats.pkl"
+    PATH_TO_TEST_SAMPLE_SPLIT_STATS = "tests/samples/sample01_split_stats.pkl"
 
     def test_read_csv(self):
         data = read_csv(self.PATH_TO_TEST_SAMPLE)
