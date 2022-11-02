@@ -1,4 +1,4 @@
 .venv/
-ml_project/data/raw/
+/data
 .DS_Store
 __pycache__/
