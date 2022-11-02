@@ -9,6 +9,7 @@ class PredictPipelineParams:
     model_path: str
     feature_transformer_path: str
     predicts_path: str
+    predict_probas_path: str
 
 
 PredictPipelineParamsSchema = class_schema(PredictPipelineParams)

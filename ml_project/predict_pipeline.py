@@ -11,6 +11,7 @@ from data.make_dataset import read_csv
 from models.model_fit_predict import (
     deserialize_model,
     predict_model,
+    predict_proba_model,
     serialize_predicts
 )
 
@@ -41,9 +42,21 @@ def predict_pipeline(predict_pipeline_params: PredictPipelineParams):
 
     logger.info(f"predicts.shape is {predicts.shape}")
 
-    path_to_predicts = serialize_predicts(predicts, predict_pipeline_params.predicts_path)
+    predict_probas = predict_proba_model(
+        model,
+        test_features
+    )
 
-    return path_to_predicts
+    logger.info(f"predict_probas.shape is {predict_probas.shape}")
+
+    path_to_predicts = serialize_predicts(
+        predicts, predict_pipeline_params.predicts_path
+    )
+    path_to_predict_probas = serialize_predicts(
+        predict_probas, predict_pipeline_params.predict_probas_path
+    )
+
+    return path_to_predicts, path_to_predict_probas
 
 
 @click.command(name="predict_pipeline")
