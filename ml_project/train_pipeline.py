@@ -11,7 +11,11 @@ from features.build_features import (
     make_features,
     extract_target
 )
-from models.model_fit_predict import train_model
+from models.model_fit_predict import (
+    train_model,
+    predict_model,
+    evaluate_model
+)
 from data.make_dataset import read_csv, split_train_test_data
 
 
@@ -42,6 +46,25 @@ def train_pipeline(training_pipeline_params: TrainingPipelineParams):
     model = train_model(
         train_features, train_target, training_pipeline_params.training_params
     )
+
+    test_features = make_features(transformer, test_df)
+    test_target = extract_target(test_df, training_pipeline_params.feature_params)
+
+    logger.info(f"test_features.shape is {test_features.shape}")
+
+    predicts = predict_model(
+        model,
+        test_features
+    )
+
+    metrics = evaluate_model(
+        predicts,
+        test_target
+    )
+
+    logger.info(f"metrics is {metrics}")
+
+    return metrics
 
 
 @click.command(name="train_pipeline")
