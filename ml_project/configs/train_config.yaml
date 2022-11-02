@@ -2,3 +2,22 @@ input_data_path: "data/raw/heart_cleveland_upload.csv"
 splitting_params:
   test_size: 0.2
   random_state: 20
+feature_params:
+  categorical_features:
+    - "sex"
+    - "cp"
+    - "fbs"
+    - "restecg"
+    - "exang"
+    - "slope"
+    - "ca"
+    - "thal"
+  numerical_features:
+    - "age"
+    - "fbs"
+    - "trestbps"
+    - "chol"
+    - "thalach"
+    - "oldpeak"
+  features_to_drop:
+  target_col: "condition"

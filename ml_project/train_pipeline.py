@@ -7,6 +7,11 @@ from entities.train_pipeline_params import (
     TrainingPipelineParams,
     read_training_pipeline_params,
 )
+from features.build_features import (
+    build_transformer,
+    make_features,
+    extract_target
+)
 
 
 logger = logging.getLogger(__name__)
@@ -25,6 +30,13 @@ def train_pipeline(training_pipeline_params: TrainingPipelineParams):
     )
     logger.info(f"train_df.shape is {train_df.shape}")
     logger.info(f"test_df.shape is {test_df.shape}")
+
+    transformer = build_transformer(training_pipeline_params.feature_params)
+    transformer.fit(train_df)
+    train_features = make_features(transformer, train_df)
+    train_target = extract_target(train_df, training_pipeline_params.feature_params)
+
+    logger.info(f"train_features.shape is {train_features.shape}")
 
 
 @click.command(name="train_pipeline")

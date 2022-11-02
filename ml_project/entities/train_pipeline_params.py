@@ -2,12 +2,14 @@ from dataclasses import dataclass
 from marshmallow_dataclass import class_schema
 import yaml
 from .split_params import SplittingParams
+from .feature_params import FeatureParams
 
 
 @dataclass()
 class TrainingPipelineParams:
     input_data_path: str
     splitting_params: SplittingParams
+    feature_params: FeatureParams
 
 
 TrainingPipelineParamsSchema = class_schema(TrainingPipelineParams)
