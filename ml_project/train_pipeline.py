@@ -10,7 +10,8 @@ from entities.train_pipeline_params import (
 from features.build_features import (
     build_transformer,
     make_features,
-    extract_target
+    extract_target,
+    serialize_transformer
 )
 from models.model_fit_predict import (
     train_model,
@@ -40,6 +41,8 @@ def train_pipeline(training_pipeline_params: TrainingPipelineParams):
 
     transformer = build_transformer(training_pipeline_params.feature_params)
     transformer.fit(train_df)
+    path_to_transformer = serialize_model(transformer, training_pipeline_params.feature_transformer_path)
+
     train_features = make_features(transformer, train_df)
     train_target = extract_target(train_df, training_pipeline_params.feature_params)
 
@@ -71,7 +74,7 @@ def train_pipeline(training_pipeline_params: TrainingPipelineParams):
 
     path_to_model = serialize_model(model, training_pipeline_params.output_model_path)
 
-    return path_to_model, metrics
+    return path_to_model, metrics, path_to_transformer
 
 
 @click.command(name="train_pipeline")

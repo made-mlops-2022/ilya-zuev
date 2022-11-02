@@ -1,3 +1,4 @@
+import pickle
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -60,3 +61,9 @@ def build_transformer(params: FeatureParams) -> ColumnTransformer:
 def extract_target(df: pd.DataFrame, params: FeatureParams) -> pd.Series:
     target = df[params.target_col]
     return target
+
+
+def serialize_transformer(transformer: ColumnTransformer, output: str) -> str:
+    with open(output, "wb") as f:
+        pickle.dump(transformer, f)
+    return output
