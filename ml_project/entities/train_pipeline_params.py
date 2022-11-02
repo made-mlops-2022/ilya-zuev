@@ -1,11 +1,13 @@
 from dataclasses import dataclass
 from marshmallow_dataclass import class_schema
 import yaml
+from .split_params import SplittingParams
 
 
 @dataclass()
 class TrainingPipelineParams:
     input_data_path: str
+    splitting_params: SplittingParams
 
 
 TrainingPipelineParamsSchema = class_schema(TrainingPipelineParams)

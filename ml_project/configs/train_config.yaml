@@ -1,1 +1,4 @@
-input_data_path: "data/raw/heart_cleveland_upload.csv"
+input_data_path: "ml_project/data/raw/heart_cleveland_upload.csv"
+splitting_params:
+  test_size: 0.2
+  random_state: 20
