@@ -3,6 +3,7 @@ from marshmallow_dataclass import class_schema
 import yaml
 from .split_params import SplittingParams
 from .feature_params import FeatureParams
+from .train_params import TrainingParams
 
 
 @dataclass()
@@ -10,6 +11,7 @@ class TrainingPipelineParams:
     input_data_path: str
     splitting_params: SplittingParams
     feature_params: FeatureParams
+    training_params: TrainingParams
 
 
 TrainingPipelineParamsSchema = class_schema(TrainingPipelineParams)

@@ -12,6 +12,7 @@ from features.build_features import (
     make_features,
     extract_target
 )
+from models.model_fit_predict import train_model
 
 
 logger = logging.getLogger(__name__)
@@ -37,6 +38,10 @@ def train_pipeline(training_pipeline_params: TrainingPipelineParams):
     train_target = extract_target(train_df, training_pipeline_params.feature_params)
 
     logger.info(f"train_features.shape is {train_features.shape}")
+
+    model = train_model(
+        train_features, train_target, training_pipeline_params.training_params
+    )
 
 
 @click.command(name="train_pipeline")
