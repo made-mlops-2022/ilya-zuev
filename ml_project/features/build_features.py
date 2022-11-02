@@ -1,6 +1,7 @@
 import pickle
 import numpy as np
 import pandas as pd
+from scipy.sparse import issparse
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
@@ -17,7 +18,7 @@ def process_categorical_features(categorical_df: pd.DataFrame) -> pd.DataFrame:
 def build_categorical_pipeline() -> Pipeline:
     categorical_pipeline = Pipeline(
         [
-            ("impute", SimpleImputer(missing_values=np.nan, strategy="constant", fill_value=-1)),
+            ("impute", SimpleImputer(missing_values=np.nan, strategy="most_frequent")),
             ("ohe", OneHotEncoder()),
         ]
     )
@@ -37,7 +38,10 @@ def build_numerical_pipeline() -> Pipeline:
 
 
 def make_features(transformer: ColumnTransformer, df: pd.DataFrame) -> pd.DataFrame:
-    return pd.DataFrame(transformer.transform(df))
+    data = transformer.transform(df)
+    if issparse(data):
+        data = data.toarray()
+    return pd.DataFrame(data)
 
 
 def build_transformer(params: FeatureParams) -> ColumnTransformer:
