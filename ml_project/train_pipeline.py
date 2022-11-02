@@ -16,6 +16,7 @@ from features.build_features import (
 from models.model_fit_predict import (
     train_model,
     predict_model,
+    predict_proba_model,
     evaluate_model,
     serialize_model
 )
@@ -64,8 +65,14 @@ def train_pipeline(training_pipeline_params: TrainingPipelineParams):
         test_features
     )
 
+    predict_probas = predict_proba_model(
+        model,
+        test_features
+    )
+
     metrics = evaluate_model(
         predicts,
+        predict_probas,
         test_target
     )
 

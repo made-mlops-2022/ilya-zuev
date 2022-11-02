@@ -36,14 +36,21 @@ def predict_model(
     return predicts
 
 
+def predict_proba_model(
+    model: SklearnClassificationModel, features: pd.DataFrame
+) -> np.ndarray:
+    predict_probas = model.predict_proba(features)
+    return predict_probas
+
+
 def evaluate_model(
-    predicts: np.ndarray, target: pd.Series
+    predicts: np.ndarray, predict_probas: np.ndarray, target: pd.Series
 ) -> Dict[str, float]:
     return {
         "accuracy_score": accuracy_score(target, predicts),
         "precision_score": precision_score(target, predicts),
         "recall_score": recall_score(target, predicts),
-        "roc_auc_score": roc_auc_score(target, predicts),
+        "roc_auc_score": roc_auc_score(target, predict_probas[:, 1]),
     }
 
 
