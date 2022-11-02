@@ -2,7 +2,6 @@ import logging
 import sys
 import click
 
-from data.make_dataset import read_csv, split_train_test_data
 from entities.train_pipeline_params import (
     TrainingPipelineParams,
     read_training_pipeline_params,
@@ -13,6 +12,7 @@ from features.build_features import (
     extract_target
 )
 from models.model_fit_predict import train_model
+from data.make_dataset import read_csv, split_train_test_data
 
 
 logger = logging.getLogger(__name__)
