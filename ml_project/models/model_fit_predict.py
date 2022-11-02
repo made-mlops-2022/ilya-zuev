@@ -12,12 +12,12 @@ from sklearn.metrics import (
 from entities.train_params import TrainingParams
 
 
-SklearnRegressionModel = LogisticRegression
+SklearnClassificationModel = LogisticRegression
 
 
 def train_model(
     features: pd.DataFrame, target: pd.Series, train_params: TrainingParams
-) -> SklearnRegressionModel:
+) -> SklearnClassificationModel:
     if train_params.model_type == "LogisticRegression":
         model = LogisticRegression(max_iter=1000, random_state=train_params.random_state)
     else:
@@ -29,7 +29,7 @@ def train_model(
 
 
 def predict_model(
-    model: SklearnRegressionModel, features: pd.DataFrame
+    model: SklearnClassificationModel, features: pd.DataFrame
 ) -> np.ndarray:
     predicts = model.predict(features)
     return predicts
