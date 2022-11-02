@@ -11,3 +11,8 @@ Train:
 ~~~
 python3 ml_project/train_pipeline.py ml_project/configs/train_config.yaml
 ~~~
+
+Predict:
+~~~
+python3 ml_project/predict_pipeline.py ml_project/configs/predict_config.yaml
+~~~

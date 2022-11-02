@@ -51,3 +51,14 @@ def serialize_model(model: SklearnClassificationModel, output: str) -> str:
     with open(output, "wb") as f:
         pickle.dump(model, f)
     return output
+
+
+def deserialize_model(input_file: str) -> SklearnClassificationModel:
+    with open(input_file, "rb") as f:
+        model = pickle.load(f)
+    return model
+
+
+def serialize_predicts(predicts: np.array, output: str) -> str:
+    np.savetxt(output, predicts, delimiter=",")
+    return output

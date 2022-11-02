@@ -1,7 +1,7 @@
 import logging
 import sys
-import click
 import json
+import click
 
 from entities.train_pipeline_params import (
     TrainingPipelineParams,
@@ -41,7 +41,9 @@ def train_pipeline(training_pipeline_params: TrainingPipelineParams):
 
     transformer = build_transformer(training_pipeline_params.feature_params)
     transformer.fit(train_df)
-    path_to_transformer = serialize_model(transformer, training_pipeline_params.feature_transformer_path)
+    path_to_transformer = serialize_transformer(
+        transformer, training_pipeline_params.feature_transformer_path
+    )
 
     train_features = make_features(transformer, train_df)
     train_target = extract_target(train_df, training_pipeline_params.feature_params)
@@ -69,7 +71,7 @@ def train_pipeline(training_pipeline_params: TrainingPipelineParams):
 
     logger.info(f"metrics is {metrics}")
 
-    with open(training_pipeline_params.metric_path, "w") as metric_file:
+    with open(training_pipeline_params.metric_path, "w", encoding="utf-8") as metric_file:
         json.dump(metrics, metric_file)
 
     path_to_model = serialize_model(model, training_pipeline_params.output_model_path)

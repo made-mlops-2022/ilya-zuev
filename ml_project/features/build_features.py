@@ -67,3 +67,9 @@ def serialize_transformer(transformer: ColumnTransformer, output: str) -> str:
     with open(output, "wb") as f:
         pickle.dump(transformer, f)
     return output
+
+
+def deserialize_transformer(input_file: str) -> ColumnTransformer:
+    with open(input_file, "rb") as f:
+        transformer = pickle.load(f)
+    return transformer
