@@ -48,8 +48,8 @@ def evaluate_model(
 ) -> Dict[str, float]:
     return {
         "accuracy_score": accuracy_score(target, predicts),
-        "precision_score": precision_score(target, predicts),
-        "recall_score": recall_score(target, predicts),
+        "precision_score": precision_score(target, predicts, zero_division=0),
+        "recall_score": recall_score(target, predicts, zero_division=0),
         "roc_auc_score": roc_auc_score(target, predict_probas[:, 1]),
     }
 

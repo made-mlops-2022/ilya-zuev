@@ -86,12 +86,12 @@ def gen_answ_for_data_split_dataset(
     name: str
 ):
     TEST_NAME = "data_split_dataset"
-    TEST_SIZE = np.random.uniform(0.01, 0.99)
+    TEST_SIZE = np.random.uniform(0.1, 0.9)
     RANDOM_STATE = test_params.random_state
 
     train, test = train_test_split(data, test_size=TEST_SIZE, random_state=RANDOM_STATE)
 
-    stats = calc_stats_for_data_split_dataset_answ(train, test, TEST_SIZE, TEST_NAME)
+    stats = calc_stats_for_data_split_dataset_answ(train, test, TEST_SIZE, RANDOM_STATE)
 
     path = os.path.join(
         test_params.output_answers_folder,
