@@ -4,3 +4,5 @@
 __pycache__/
 /models
 .coverage
+/ml_project/tests/samples/generated/pipelines/models
+/ml_project/tests/samples/generated/samples

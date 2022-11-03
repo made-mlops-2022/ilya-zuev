@@ -1,0 +1,5 @@
+input_data_path: ""
+model_path: "ml_project/tests/samples/generated/pipelines/models/model.pkl"
+feature_transformer_path: "ml_project/tests/samples/generated/pipelines/models/transformer.pkl"
+predicts_path: "ml_project/tests/samples/generated/pipelines/models/predicts.csv"
+predict_probas_path: "ml_project/tests/samples/generated/pipelines/models/predict_probas.csv"
