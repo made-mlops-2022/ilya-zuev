@@ -5,7 +5,8 @@ from .model_fit_predict import (
     evaluate_model,
     serialize_model,
     deserialize_model,
-    serialize_predicts
+    serialize_predicts,
+    SklearnClassificationModel
 )
 
 
@@ -16,5 +17,6 @@ __all__ = [
     "evaluate_model",
     "serialize_model",
     "deserialize_model",
-    "serialize_predicts"
+    "serialize_predicts",
+    "SklearnClassificationModel"
 ]

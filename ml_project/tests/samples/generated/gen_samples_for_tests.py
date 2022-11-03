@@ -1,6 +1,6 @@
-import click
 import os
 import pickle
+import click
 import pandas as pd
 import numpy as np
 from faker import Faker
@@ -33,14 +33,20 @@ def gen_sample_for_test(generator: Faker, test_params: TestParams, name: str) ->
 
     return data
 
-def gen_answ_for_data_read_csv(data: pd.DataFrame, test_params: TestParams, name: str):
-    TEST_NAME = "data_read_csv"
 
-    stats = dict()
+def calc_stats_for_data_read_csv_answ(data: pd.DataFrame):
+    stats = {}
     stats["type"] = type(data)
     stats["shape"] = data.shape
     stats["columns"] = data.columns
     stats["describe"] = data.describe()
+    return stats
+
+
+def gen_answ_for_data_read_csv(data: pd.DataFrame, test_params: TestParams, name: str):
+    TEST_NAME = "data_read_csv"
+
+    stats = calc_stats_for_data_read_csv_answ(data)
 
     path = os.path.join(
         test_params.output_answers_folder,
@@ -58,8 +64,22 @@ def gen_answ_for_data_read_csv(data: pd.DataFrame, test_params: TestParams, name
     with open(path, "wb") as f:
         pickle.dump(stats, f)
 
+
+def calc_stats_for_data_split_dataset_answ(
+    train: pd.DataFrame,
+    test: pd.DataFrame,
+    test_size: float,
+    random_sate: int
+):
+    stats = {}
+    stats["test_size"] = test_size
+    stats["random_state"] = random_sate
+    stats["train"] = train
+    stats["test"] = test
+    return stats
+
+
 def gen_answ_for_data_split_dataset(
-    generator: Faker,
     data: pd.DataFrame,
     test_params:
     TestParams,
@@ -71,11 +91,7 @@ def gen_answ_for_data_split_dataset(
 
     train, test = train_test_split(data, test_size=TEST_SIZE, random_state=RANDOM_STATE)
 
-    stats = dict()
-    stats["test_size"] = TEST_SIZE
-    stats["random_state"] = RANDOM_STATE
-    stats["train"] = train
-    stats["test"] = test
+    stats = calc_stats_for_data_split_dataset_answ(train, test, TEST_SIZE, TEST_NAME)
 
     path = os.path.join(
         test_params.output_answers_folder,
@@ -93,12 +109,14 @@ def gen_answ_for_data_split_dataset(
     with open(path, "wb") as f:
         pickle.dump(stats, f)
 
+
 def create_folders(test_params: TestParams):
     if not os.path.exists(test_params.output_samples_folder):
         os.makedirs(test_params.output_samples_folder)
 
     if not os.path.exists(test_params.output_answers_folder):
         os.makedirs(test_params.output_answers_folder)
+
 
 def gen_samples_for_tests(test_params: TestParams):
     np.random.seed(test_params.random_state)
@@ -111,7 +129,7 @@ def gen_samples_for_tests(test_params: TestParams):
         name = f"{test_params.sample_base_name}{i:02d}"
         data = gen_sample_for_test(generator, test_params, f"{name}.csv")
         gen_answ_for_data_read_csv(data, test_params, f"{name}.pkl")
-        gen_answ_for_data_split_dataset(generator, data, test_params, f"{name}.pkl")
+        gen_answ_for_data_split_dataset(data, test_params, f"{name}.pkl")
 
 
 @click.command(name="train_pipeline")
@@ -123,4 +141,3 @@ def gen_samples_for_tests_command(config_path: str):
 
 if __name__ == "__main__":
     gen_samples_for_tests_command()
-

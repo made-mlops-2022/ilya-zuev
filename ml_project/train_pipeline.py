@@ -2,7 +2,7 @@ import logging
 import sys
 import json
 import click
-
+import pandas as pd
 from entities.train_pipeline_params import (
     TrainingPipelineParams,
     read_training_pipeline_params,
@@ -18,7 +18,8 @@ from models.model_fit_predict import (
     predict_model,
     predict_proba_model,
     evaluate_model,
-    serialize_model
+    serialize_model,
+    SklearnClassificationModel
 )
 from data.make_dataset import read_csv, split_train_test_data
 
@@ -27,6 +28,30 @@ logger = logging.getLogger(__name__)
 handler = logging.StreamHandler(sys.stdout)
 logger.setLevel(logging.INFO)
 logger.addHandler(handler)
+
+
+def predict_and_evaluate_model(
+    model: SklearnClassificationModel,
+    feautres: pd.DataFrame,
+    target: pd.Series
+):
+    predicts = predict_model(
+        model,
+        feautres
+    )
+
+    predict_probas = predict_proba_model(
+        model,
+        feautres
+    )
+
+    metrics = evaluate_model(
+        predicts,
+        predict_probas,
+        target
+    )
+
+    return predicts, predict_probas, metrics
 
 
 def train_pipeline(training_pipeline_params: TrainingPipelineParams):
@@ -60,19 +85,9 @@ def train_pipeline(training_pipeline_params: TrainingPipelineParams):
 
     logger.info(f"test_features.shape is {test_features.shape}")
 
-    predicts = predict_model(
+    _, _, metrics = predict_and_evaluate_model(
         model,
-        test_features
-    )
-
-    predict_probas = predict_proba_model(
-        model,
-        test_features
-    )
-
-    metrics = evaluate_model(
-        predicts,
-        predict_probas,
+        test_features,
         test_target
     )
 

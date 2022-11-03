@@ -2,13 +2,13 @@ import unittest
 import logging
 import pandas as pd
 import numpy as np
-from data.make_dataset import read_csv
+from entities.feature_params import FeatureParams
 from features.build_features import (
     make_features,
     build_transformer,
     extract_target
 )
-from entities.feature_params import FeatureParams
+from data.make_dataset import read_csv
 
 
 class TestBuildFeatures(unittest.TestCase):

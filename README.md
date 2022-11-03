@@ -2,17 +2,27 @@
 
 Installation:
 ~~~
-python3 -m venv .venv
+python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ~~~
 
 Train:
 ~~~
-python3 ml_project/train_pipeline.py ml_project/configs/train_config.yaml
+python ml_project/train_pipeline.py ml_project/configs/train_config.yaml
 ~~~
 
 Predict:
 ~~~
-python3 ml_project/predict_pipeline.py ml_project/configs/predict_config.yaml
+python ml_project/predict_pipeline.py ml_project/configs/predict_config.yaml
+~~~
+
+Generate data for tests:
+~~~
+python ml_project/tests/samples/generated/gen_samples_for_tests.py ml_project/tests/samples/generated/test_config.yaml
+~~~
+
+Tests:
+~~~
+coverage run -m unittest && coverage report -m --omit="*/test*"
 ~~~

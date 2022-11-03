@@ -3,14 +3,14 @@ import logging
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
-from data.make_dataset import read_csv
-from models.model_fit_predict import  (
+from entities.train_params import TrainingParams
+from models.model_fit_predict import (
     train_model,
     predict_model,
     predict_proba_model,
     evaluate_model
 )
-from entities.train_params import TrainingParams
+from data.make_dataset import read_csv
 
 
 class TestBuildFeatures(unittest.TestCase):
@@ -37,12 +37,16 @@ class TestBuildFeatures(unittest.TestCase):
         self.assertIsInstance(model, LogisticRegression)
         self.assertEqual(model.get_params()["random_state"], RANDOM_STATE)
 
-        with self.assertRaises(NotImplementedError) as err:
+        with self.assertRaises(NotImplementedError) as _:
             params = TrainingParams(
                 model_type="",
                 random_state=RANDOM_STATE
             )
-            model = train_model(self.data[self.TRAIN_COLUMNS], self.data[self.TARGET_COLUMN], params)
+            model = train_model(
+                self.data[self.TRAIN_COLUMNS],
+                self.data[self.TARGET_COLUMN],
+                params
+            )
 
     def test_predicts(self):
         params = TrainingParams(
