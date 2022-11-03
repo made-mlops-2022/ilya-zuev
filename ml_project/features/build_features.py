@@ -8,6 +8,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
 from entities.feature_params import FeatureParams
+from features.abs_transformer import AbsTransformer
 
 
 def build_categorical_pipeline() -> Pipeline:
@@ -22,7 +23,10 @@ def build_categorical_pipeline() -> Pipeline:
 
 def build_numerical_pipeline() -> Pipeline:
     num_pipeline = Pipeline(
-        [("impute", SimpleImputer(missing_values=np.nan, strategy="mean"))]
+        [
+            ("impute", SimpleImputer(missing_values=np.nan, strategy="mean")),
+            ("square", AbsTransformer())
+        ]
     )
     return num_pipeline
 

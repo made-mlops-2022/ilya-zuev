@@ -5,6 +5,7 @@ from .build_features import (
     serialize_transformer,
     deserialize_transformer
 )
+from .abs_transformer import AbsTransformer
 
 
 __all__ = [
@@ -12,5 +13,6 @@ __all__ = [
     "build_transformer",
     "extract_target",
     "serialize_transformer",
-    "deserialize_transformer"
+    "deserialize_transformer",
+    "AbsTransformer"
 ]
