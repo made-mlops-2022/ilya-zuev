@@ -1,4 +1,5 @@
 import unittest
+import logging
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -13,13 +14,18 @@ from entities.train_params import TrainingParams
 
 
 class TestBuildFeatures(unittest.TestCase):
-    PATH_TO_TEST_SAMPLE = "tests/samples/sample01.csv"
+    PATH_TO_TEST_SAMPLE = "ml_project/tests/samples/sample01.csv"
 
     def setUp(self):
+        logging.disable(logging.CRITICAL)
+
         self.data = read_csv(self.PATH_TO_TEST_SAMPLE)
         self.TARGET_COLUMN = "condition"
         self.TRAIN_COLUMNS = list(self.data.columns)
         self.TRAIN_COLUMNS.remove(self.TARGET_COLUMN)
+
+    def tearDown(self):
+        logging.disable(logging.NOTSET)
 
     def test_train_model(self):
         RANDOM_STATE = 42
@@ -29,7 +35,7 @@ class TestBuildFeatures(unittest.TestCase):
         )
         model = train_model(self.data[self.TRAIN_COLUMNS], self.data[self.TARGET_COLUMN], params)
         self.assertIsInstance(model, LogisticRegression)
-        self.assertEqual(model.get_params()['random_state'], RANDOM_STATE)
+        self.assertEqual(model.get_params()["random_state"], RANDOM_STATE)
 
         with self.assertRaises(NotImplementedError) as err:
             params = TrainingParams(

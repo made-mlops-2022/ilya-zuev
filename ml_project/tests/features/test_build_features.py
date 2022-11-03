@@ -1,4 +1,5 @@
 import unittest
+import logging
 import pandas as pd
 import numpy as np
 from data.make_dataset import read_csv
@@ -11,7 +12,13 @@ from entities.feature_params import FeatureParams
 
 
 class TestBuildFeatures(unittest.TestCase):
-    PATH_TO_TEST_SAMPLE = "tests/samples/sample01.csv"
+    PATH_TO_TEST_SAMPLE = "ml_project/tests/samples/sample01.csv"
+
+    def setUp(self):
+        logging.disable(logging.CRITICAL)
+
+    def tearDown(self):
+        logging.disable(logging.NOTSET)
 
     def make_features_for_test(self, values, params):
         data = pd.DataFrame.from_dict(values)

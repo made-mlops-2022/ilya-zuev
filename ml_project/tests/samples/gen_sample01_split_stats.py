@@ -12,10 +12,10 @@ def gen_stats():
     train, test = train_test_split(data, test_size=TEST_SIZE, random_state=RANDOM_STATE)
 
     stats = dict()
-    stats['test_size'] = TEST_SIZE
-    stats['random_state'] = RANDOM_STATE
-    stats['train'] = train
-    stats['test'] = test
+    stats["test_size"] = TEST_SIZE
+    stats["random_state"] = RANDOM_STATE
+    stats["train"] = train
+    stats["test"] = test
 
     with open(f"{FILE_NAME}_split_stats.pkl", "wb") as f:
         pickle.dump(stats, f)
