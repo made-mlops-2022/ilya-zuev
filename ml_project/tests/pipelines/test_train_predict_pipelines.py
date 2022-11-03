@@ -24,7 +24,7 @@ class TestPipeline(unittest.TestCase):
     def check_pipeline(self, params):
         raise NotImplementedError
 
-    def check_pipelines_on_genereted_date(self, params):
+    def check_pipelines_on_genereted_datа(self, params):
         for i in range(self.test_params.sample_count):
             sample_path = os.path.join(
                 self.test_params.output_samples_folder,
@@ -58,7 +58,7 @@ class TestTrainPipeline(TestPipeline):
 
         path_to_config = "ml_project/tests/samples/generated/pipelines/configs/train_config.yaml"
         params = read_training_pipeline_params(path_to_config)
-        self.check_pipelines_on_genereted_date(params)
+        self.check_pipelines_on_genereted_datа(params)
 
 
 class TestPredictPipeline(TestPipeline):
@@ -87,4 +87,4 @@ class TestPredictPipeline(TestPipeline):
 
         path_to_config = "ml_project/tests/samples/generated/pipelines/configs/predict_config.yaml"
         params = read_predict_pipeline_params(path_to_config)
-        self.check_pipelines_on_genereted_date(params)
+        self.check_pipelines_on_genereted_datа(params)
