@@ -7,8 +7,8 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
-from entities.feature_params import FeatureParams
-from features.abs_transformer import AbsTransformer
+from ml_project.entities.feature_params import FeatureParams
+from ml_project.features.abs_transformer import AbsTransformer
 
 
 def build_categorical_pipeline() -> Pipeline:

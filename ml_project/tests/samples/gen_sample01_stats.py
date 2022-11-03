@@ -1,6 +1,6 @@
 import pickle
 import pandas as pd
-from tests.samples.generated.gen_samples_for_tests import (
+from ml_project.tests.samples.generated.gen_samples_for_tests import (
     calc_stats_for_data_read_csv_answ
 )
 

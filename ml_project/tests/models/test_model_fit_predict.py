@@ -3,14 +3,14 @@ import logging
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
-from entities.train_params import TrainingParams
-from models.model_fit_predict import (
+from ml_project.entities.train_params import TrainingParams
+from ml_project.models.model_fit_predict import (
     train_model,
     predict_model,
     predict_proba_model,
     evaluate_model
 )
-from data.make_dataset import read_csv
+from ml_project.data.make_dataset import read_csv
 
 
 class TestBuildFeatures(unittest.TestCase):

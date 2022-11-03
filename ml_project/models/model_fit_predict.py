@@ -10,7 +10,7 @@ from sklearn.metrics import (
     roc_auc_score
 )
 
-from entities.train_params import TrainingParams
+from ml_project.entities.train_params import TrainingParams
 
 
 SklearnClassificationModel = LogisticRegression

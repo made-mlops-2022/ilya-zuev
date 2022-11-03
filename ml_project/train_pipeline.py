@@ -3,17 +3,17 @@ import sys
 import json
 import click
 import pandas as pd
-from entities.train_pipeline_params import (
+from ml_project.entities.train_pipeline_params import (
     TrainingPipelineParams,
     read_training_pipeline_params,
 )
-from features.build_features import (
+from ml_project.features.build_features import (
     build_transformer,
     make_features,
     extract_target,
     serialize_transformer
 )
-from models.model_fit_predict import (
+from ml_project.models.model_fit_predict import (
     train_model,
     predict_model,
     predict_proba_model,
@@ -21,7 +21,7 @@ from models.model_fit_predict import (
     serialize_model,
     SklearnClassificationModel
 )
-from data.make_dataset import read_csv, split_train_test_data
+from ml_project.data.make_dataset import read_csv, split_train_test_data
 
 
 logger = logging.getLogger(__name__)

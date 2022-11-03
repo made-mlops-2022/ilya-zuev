@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 from faker import Faker
 from sklearn.model_selection import train_test_split
-from tests.samples.generated.test_params import TestParams, read_test_params
+from ml_project.tests.samples.generated.test_params import TestParams, read_test_params
 
 
 def gen_sample_for_test(generator: Faker, test_params: TestParams, name: str) -> pd.DataFrame:

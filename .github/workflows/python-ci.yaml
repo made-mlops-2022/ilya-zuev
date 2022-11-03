@@ -1,0 +1,57 @@
+name: Python package ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download from Google Drive
+        run: |
+          mkdir data
+          mkdir data/raw
+          wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1VjlXs1Ry96goYnMdhl-rMoWpj_Uo8mKQ' -O data/raw/heart_cleveland_upload.csv
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install flake8
+          pip install pylint
+          pip install .
+
+      - name: Train base pipeline
+        run: |
+          mkdir models
+          python ml_project/train_pipeline.py ml_project/configs/train_config.yaml
+
+      - name: Predict base pipeline
+        run: python ml_project/predict_pipeline.py ml_project/configs/predict_config.yaml
+
+      - name: Lint with flake8
+        run: |
+          flake8 --max-line-length=100 ml_project
+
+      - name: Lint with pylint
+        run: |
+          pylint ml_project --disable=C0114,C0115,C0116,E0401,W1203,C0103,E1120,W0613,E0611
+
+      - name: Test with unittest
+        run: |
+          mkdir ml_project/tests/samples/generated/pipelines/models
+          python ml_project/tests/samples/generated/gen_samples_for_tests.py ml_project/tests/samples/generated/test_config.yaml
+          coverage run -m unittest && coverage report -m --omit="*/test*"

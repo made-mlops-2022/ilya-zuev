@@ -1,7 +1,7 @@
 import pickle
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from tests.samples.generated.gen_samples_for_tests import (
+from ml_project.tests.samples.generated.gen_samples_for_tests import (
     calc_stats_for_data_split_dataset_answ
 )
 

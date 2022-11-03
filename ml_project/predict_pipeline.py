@@ -2,13 +2,13 @@ import logging
 import sys
 import click
 
-from entities.predict_pipeline_params import (
+from ml_project.entities.predict_pipeline_params import (
     PredictPipelineParams,
     read_predict_pipeline_params,
 )
-from features.build_features import deserialize_transformer, make_features
-from data.make_dataset import read_csv
-from models.model_fit_predict import (
+from ml_project.features.build_features import deserialize_transformer, make_features
+from ml_project.data.make_dataset import read_csv
+from ml_project.models.model_fit_predict import (
     deserialize_model,
     predict_model,
     predict_proba_model,

@@ -2,9 +2,9 @@ import unittest
 import pickle
 import logging
 import os
-from tests.samples.generated.test_params import read_test_params
-from entities.split_params import SplittingParams
-from data.make_dataset import read_csv, split_train_test_data
+from ml_project.tests.samples.generated.test_params import read_test_params
+from ml_project.entities.split_params import SplittingParams
+from ml_project.data.make_dataset import read_csv, split_train_test_data
 
 
 class TestMakeDataset(unittest.TestCase):

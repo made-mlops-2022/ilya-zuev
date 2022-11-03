@@ -1,7 +1,7 @@
 from typing import Tuple
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from entities import SplittingParams
+from ml_project.entities.split_params import SplittingParams
 
 
 def read_csv(path: str) -> pd.DataFrame:

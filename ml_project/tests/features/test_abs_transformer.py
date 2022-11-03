@@ -1,9 +1,7 @@
 import unittest
 import logging
 import pandas as pd
-import numpy as np
-from sklearn.pipeline import Pipeline
-from features.abs_transformer import AbsTransformer
+from ml_project.features.abs_transformer import AbsTransformer
 
 
 class TestAbsTransformer(unittest.TestCase):

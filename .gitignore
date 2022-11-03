@@ -6,3 +6,5 @@ __pycache__/
 .coverage
 /ml_project/tests/samples/generated/pipelines/models
 /ml_project/tests/samples/generated/samples
+build/
+ml_project.egg*
