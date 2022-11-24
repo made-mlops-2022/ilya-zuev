@@ -1,7 +1,7 @@
 import csv
 from fastapi.testclient import TestClient
 
-from .app import app, Data
+from .app import app
 
 
 PATH_TO_DATA = "./online_inference/data/test_data/test.csv"

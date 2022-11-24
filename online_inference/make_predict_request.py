@@ -1,6 +1,6 @@
+import csv
 import requests
 import click
-import csv
 
 
 def make_predict_request(path_to_data: str):
@@ -8,7 +8,7 @@ def make_predict_request(path_to_data: str):
 
     with open(path_to_data) as csvfile:
         csvreader = csv.reader(csvfile, delimiter=",")
-        data = [row for row in csvreader]
+        data = list(row for row in csvreader)
 
     test_data = {
         "data": data

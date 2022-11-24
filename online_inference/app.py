@@ -1,6 +1,6 @@
-import pandas as pd
 import pickle
 from typing import List
+import pandas as pd
 from scipy.sparse import issparse
 from fastapi import FastAPI
 from pydantic import BaseModel
