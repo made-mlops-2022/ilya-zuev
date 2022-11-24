@@ -4,8 +4,8 @@ from fastapi.testclient import TestClient
 from .app import app, Data
 
 
-PATH_TO_DATA = "./data/test_data/test.csv"
-PATH_TO_ANSWER = "./data/test_data/answer.csv"
+PATH_TO_DATA = "./online_inference/data/test_data/test.csv"
+PATH_TO_ANSWER = "./online_inference/data/test_data/answer.csv"
 
 client = TestClient(app)
 

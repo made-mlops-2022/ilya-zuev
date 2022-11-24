@@ -4,7 +4,7 @@ import csv
 
 
 def make_predict_request(path_to_data: str):
-    url = "http://127.0.0.1:8000/predict"
+    url = "http://127.0.0.1/predict"
 
     with open(path_to_data) as csvfile:
         csvreader = csv.reader(csvfile, delimiter=",")
