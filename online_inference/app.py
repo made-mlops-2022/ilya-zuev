@@ -40,7 +40,7 @@ def predict(data: List[List[str]]):
     return predicts
 
 
-@app.get("/predict")
+@app.post("/predict")
 async def make_predict(data: Data):
     predicts = predict(data.data).tolist()
     return predicts

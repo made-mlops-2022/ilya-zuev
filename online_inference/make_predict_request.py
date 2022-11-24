@@ -14,7 +14,7 @@ def make_predict_request(path_to_data: str):
         "data": data
     }
 
-    response = requests.get(url, json=test_data)
+    response = requests.post(url, json=test_data)
     print(response.content)
 
 
