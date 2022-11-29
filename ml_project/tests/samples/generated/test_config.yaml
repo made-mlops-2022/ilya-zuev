@@ -1,0 +1,7 @@
+output_samples_folder: "ml_project/tests/samples/generated/samples/"
+output_answers_folder: "ml_project/tests/samples/generated/samples/answers"
+sample_base_name: "sample"
+sample_count: 10
+sample_rows_low: 10
+sample_rows_high: 100
+random_state: 20

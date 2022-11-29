@@ -1,0 +1,10 @@
+.venv/
+/data
+.DS_Store
+__pycache__/
+/models
+.coverage
+/ml_project/tests/samples/generated/pipelines/models
+/ml_project/tests/samples/generated/samples
+build/
+ml_project.egg*
