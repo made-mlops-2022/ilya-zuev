@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-ml-deployment-bg
+  labels:
+    app: fastapi-ml
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fastapi-ml
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 0
+  template:
+    metadata:
+      name: fastapi-ml
+      labels:
+        app: fastapi-ml
+    spec:
+      containers:
+        - image: ikekz/made:online-inference
+          name: fastapi-ml
+          ports:
+            - containerPort: 8000
