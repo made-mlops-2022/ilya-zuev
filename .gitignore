@@ -8,3 +8,4 @@ __pycache__/
 /ml_project/tests/samples/generated/samples
 build/
 ml_project.egg*
+airflow_ml_dags/data/
