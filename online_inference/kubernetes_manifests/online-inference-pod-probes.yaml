@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fastapi-ml-probes
+  labels:
+    app: fastapi-ml
+spec:
+  containers:
+    - image: ikekz/made:online-inference_v2
+      name: fastapi-ml-probes
+      ports:
+        - containerPort: 8000
+      readinessProbe:
+        httpGet:
+          path: /healthz
+          port: 8000
+          httpHeaders:
+          - name: Custom-Header
+            value: "waiting"
+        initialDelaySeconds: 15
+        periodSeconds: 3
+      livenessProbe:
+        httpGet:
+          path: /healthz
+          port: 8080
+          httpHeaders:
+          - name: Custom-Header
+            value: "too long"
+        initialDelaySeconds: 3
+        periodSeconds: 3

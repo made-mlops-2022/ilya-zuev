@@ -5,6 +5,7 @@ from scipy.sparse import issparse
 from fastapi import FastAPI
 from pydantic import BaseModel
 import os
+import time
 
 
 PATH_TO_MODEL = "./online_inference/model/model.pkl"
@@ -12,6 +13,7 @@ PATH_TO_TRANSFORMER = "./online_inference/model/transformer.pkl"
 
 app = FastAPI()
 
+start_time = time.time()
 
 class Data(BaseModel):
     data: List[List[str]]
@@ -44,6 +46,16 @@ def predict(data: List[List[str]]):
 async def make_predict(data: Data):
     predicts = predict(data.data).tolist()
     return predicts
+
+
+@app.get("/healthz")
+async def is_container_ready():
+    current_time = time.time()
+    if current_time - start_time < 30:
+        return "waiting"
+
+    if current_time - start_time > 60:
+        return "too long"
 
 
 @app.get("/health")

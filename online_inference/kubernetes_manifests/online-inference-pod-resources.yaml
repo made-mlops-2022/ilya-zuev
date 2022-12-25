@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fastapi-ml-resources
+  labels:
+    app: fastapi-ml
+spec:
+  containers:
+    - image: ikekz/made:online-inference
+      name: fastapi-ml-resources
+      ports:
+        - containerPort: 8000
+      resources:
+        requests:
+          cpu: "250m"
+        limits:
+          cpu: "250m"

@@ -13,4 +13,4 @@ RUN pip install --no-cache-dir .
 
 COPY ./online_inference /code/online_inference
 
-CMD ["uvicorn", "online_inference.app:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["bash", "online_inference/run.sh"]
